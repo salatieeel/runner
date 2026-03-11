@@ -1,6 +1,31 @@
+<div align="center">
+
+# 🚀 Implementação e Integração
+
+### *2026-01 · Trabalho Prático*
+
+```
+┌─────────────────────────────────────────────────────────┐
+│  S I S T E M A   R U N N E R                            │
+│  Da especificação à entrega — construindo em conjunto   │
+└─────────────────────────────────────────────────────────┘
+```
+
+**👥 Equipe**
+
+| Yuri Salatiel de Lima | Gabriel Tavares dos Santos |
+| :--------------------: | :-------------------------: |
+| *Desenvolvimento* | *Desenvolvimento* |
+
+*Disciplina Implementação e Integração (2026-01)*
+
+</div>
+
+---
+
 # Sistema Runner
 
-Especificação do trabalho prático da disciplina Implementação e Integração (2026-01)
+Especificação do trabalho prático da disciplina **Implementação e Integração (2026-01)**
 
 - [Especificação](especificacao.md)
 - [Design](design.md)
