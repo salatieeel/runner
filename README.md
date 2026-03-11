@@ -27,9 +27,13 @@
 
 Especificação do trabalho prático da disciplina **Implementação e Integração (2026-01)**
 
-- [Especificação](especificacao.md)
-- [Design](design.md)
-- Forneça o seu nome e o repositorio no github usado exclusivamente para o registro das atividades da disciplina na [planilha](https://docs.google.com/spreadsheets/d/1sZoPCO9iNCbRyshtOGs70UUcZHDo6hZJBQSqm5rACTw/edit?usp=sharing) (TURMA B). Se grupo, máximo de 2 membros, repita a URL do repositório.
+- **Documentação e planejamento do projeto:** [docs/](docs/) — requisitos, escopo, arquitetura, backlog e referências
+- **Especificação de referência (material do professor):** [problema/especificacao.md](problema/especificacao.md)
+- **Design (C4):** [problema/desing.md](problema/desing.md)
+- **Contexto e requisitos:** [problema/contexto.md](problema/contexto.md)
+- **Caminho de implementação:** [problema/way.md](problema/way.md)
+
+Forneça o seu nome e o repositório no GitHub usado exclusivamente para o registro das atividades da disciplina na [planilha](https://docs.google.com/spreadsheets/d/1sZoPCO9iNCbRyshtOGs70UUcZHDo6hZJBQSqm5rACTw/edit?usp=sharing) (TURMA B). Se grupo, máximo de 2 membros, repita a URL do repositório.
 
 # O que está rolando... (desde 11/03/2026)
 
