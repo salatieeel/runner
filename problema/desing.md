@@ -7,7 +7,7 @@
 
 ## 1. Diagrama de Contexto
 
-![](diagramas/imagens/contexto.svg)
+![](diagramas/contexto.svg)
 
 **Atores e Sistemas Externos:**
 
@@ -19,7 +19,7 @@
 
 ## 2. Diagrama de Contêineres
 
-![](diagramas/imagens/conteineres.svg)
+![](diagramas/conteineres.svg)
 
 **Comunicação entre contêineres:**
 
