@@ -7,7 +7,7 @@
 
 ## 1. Diagrama de Contexto
 
-![](contexto.svg)
+![](diagramas/imagens/contexto.svg)
 
 **Atores e Sistemas Externos:**
 
@@ -19,7 +19,7 @@
 
 ## 2. Diagrama de Contêineres
 
-![](conteineres.svg)
+![](diagramas/imagens/conteineres.svg)
 
 **Comunicação entre contêineres:**
 
@@ -30,3 +30,4 @@
 | assinador | assinador.jar | chamada de método ou HTTP | Invocação direta ou requisição HTTP (conforme modo de execução) |
 | assinador.jar | Dispositivo Criptográfico | PKCS#11 | Interface padrão para comunicação com tokens e smart cards |
 | simulador | Simulador do HubSaúde | HTTP | Invoca e monitora o ciclo de vida do simulador |
+

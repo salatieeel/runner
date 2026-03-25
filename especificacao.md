@@ -2,9 +2,9 @@
 
 ## 1. Visão geral
 
-Este documento define o trabalho prático da disciplina de Implementação e Integração do Bacharelado em Engenharia de Software (2026). O trabalho visa proporcionar aos estudantes a oportunidade de prática de construção de software por meio do desenvolvimento do *Sistema Runner*.
+Este documento define o trabalho prático da disciplina de Implementação e Integração do Bacharelado em Engenharia de Software (2026). O trabalho visa proporcionar aos estudantes a oportunidade de prática de construção de software por meio do desenvolvimento do *Sistema Runner* útil para integradores da Plataforma HubSaúde.
 
-Em tempo, este trabalho prático proposto é de interesse real da Secretaria de Estado de Saúde de Goiás (SES) e da Universidade Federal de Goiás (UFG), que realizam um esforço conjunto na definição e implementação de uma plataforma de interoperabilidade de dados em saúde.
+Em tempo, este trabalho prático proposto é de interesse real da Secretaria de Estado de Saúde de Goiás (SES) e da Universidade Federal de Goiás (UFG), que realizam um esforço conjunto na definição e implementação da plataforma HubSaúde de interoperabilidade de dados em saúde.
 
 ## 2. Objetivo do Sistema Runner
 
@@ -28,6 +28,7 @@ Facilitar o acesso à funcionalidade de execução de aplicações Java via linh
 - ✅ Simulação de criação de assinatura (assinador.jar)
 - ✅ Simulação de validação de assinatura (assinador.jar)
 - ✅ Tratamento de erros dos parâmetros e exceções (assinador.jar)
+- ✅ Desenvolvimento da aplicação simulador (CLI multiplataforma)
 - ✅ Testes 
 - ✅ Documentação de uso
 
@@ -45,36 +46,41 @@ Facilitar o acesso à funcionalidade de execução de aplicações Java via linh
 
 Os requisitos funcionais são expressos na forma de histórias de usuário (user stories).
 
-### US-01: Invocar Assinador via CLI
+### US-01: Invocar assinador.jar via CLI
 
 **Como** usuário do Sistema Runner  
 **Quero** executar comandos de assinatura digital através da linha de comandos  
-**Para que** eu possa invocar a aplicação **assinador.jar** (doravante, Assinador) sem conhecer os detalhes técnicos de configuração Java
+**Para que** eu possa invocar a aplicação **assinador.jar** (doravante, Assinador) sem conhecer os detalhes técnicos de configuração Java, tanto para assinar quanto para validar assinaturas digitais.
 
 **Critérios de aceitação:**
 - [ ] O CLI deve aceitar comandos para criação e validação de assinatura
-- [ ] O CLI deve invocar o Assinador com os parâmetros fornecidos
-- [ ] O CLI deve suportar invocação direta do Assinador (modo local/CLI)
-- [ ] O CLI deve suportar invocação do Assinador via HTTP (modo servidor)
+- [ ] O CLI deve invocar o assinador.jar com os parâmetros fornecidos
+- [ ] O CLI deve permitir a invocação direta do assinador.jar (modo local/CLI)
+- [ ] O CLI deve permitir a invocação do assinador.jar via HTTP (modo servidor)
 - [ ] O CLI deve exibir o resultado da operação de forma legível
+- [ ] O CLI deve iniciar o assinador.jar no modo servidor usando a porta padrão quando não orientado de forma diferente
+- [ ] O CLI deve detectar se instância do assinador.jar já está em execução no modo servidor e usar essa instância, se não orientado de forma diferente. 
+- [ ] O CLI deve fazer uso do assinador.jar no modo servidor quando não orientado para usar o modo local
+- [ ] O CLI deve interromper a execução do assinador.jar na porta padrão ou outra indicada.
+- [ ] O CLI deve permitir a requisição de interrupção programada do assinador.jar após o número de minutos fornecidos sem interação
 
 **Modos de invocação do Assinador:**
-- **Invocação direta (CLI)**: o CLI invoca o Assinador diretamente via linha de comandos. Cada execução realiza o ciclo completo de inicialização da JVM e carga da aplicação (*cold start*), sendo adequado para execuções esporádicas ou scripts de automação.
-- **Invocação via HTTP (servidor)**: o Assinador é iniciado uma única vez e permanece em execução, aguardando requisições HTTP. O CLI envia requisições ao Assinador neste modo, eliminando o overhead de inicialização nas chamadas subsequentes (*warm start*), oferecendo menor latência e maior throughput para cenários com múltiplas requisições.
+- **Invocação direta ou local (CLI)**: o CLI invoca o assinador.jar diretamente via linha de comandos. Cada execução realiza o ciclo completo de inicialização da JVM e carga da aplicação (*cold start*), sendo adequado para execuções esporádicas ou scripts de automação.
+- **Invocação via HTTP (servidor)**: o assinador.jar é iniciado e permanece em execução, aguardando requisições HTTP. O CLI envia requisições ao assinador.jar neste modo, eliminando o overhead de inicialização nas chamadas subsequentes (*warm start*), oferecendo menor latência e maior throughput para cenários com múltiplas requisições.
 
 
-### US-02: Simular Assinatura Digital com Validação de Parâmetros
+### US-02: Simular assinatura digital com validação de parâmetros
 
 **Como** usuário do Sistema Runner  
-**Quero** que o Assinador valide rigorosamente os parâmetros de entrada antes de simular uma operação de assinatura digital  
-**Para que** eu receba feedback imediato sobre erros de parâmetros, garantindo que apenas requisições bem formadas sejam processadas
+**Quero** que o assinador.jar valide rigorosamente os parâmetros de entrada antes de simular uma operação de assinatura digital  
+**Para que** eu receba feedback imediato sobre erros de parâmetros, garantindo que apenas requisições bem formadas sejam aceitas
 
 **Critérios de aceitação:**
-- [ ] O Assinador deve validar todos os parâmetros conforme especificações FHIR
-- [ ] O Assinador deve simular criação de assinatura retornando resposta pré-construída quando parâmetros válidos
-- [ ] O Assinador deve simular validação de assinatura retornando resultado pré-determinado
-- [ ] O Assinador deve suportar interação com dispositivo criptográfico (token/smart card) via interface PKCS#11
-- [ ] O Assinador deve retornar mensagens de erro claras quando parâmetros forem inválidos
+- [ ] O assinador.jar deve validar todos os parâmetros conforme especificações (veja seção de referências abaixo)
+- [ ] O assinador.jar deve simular a criação de assinatura retornando resposta pré-construída quando parâmetros válidos
+- [ ] O assinador.jar deve simular validação de assinatura retornando resultado pré-determinado
+- [ ] O assinador.jar deve suportar interação com dispositivo criptográfico (token/smart card) via interface PKCS#11
+- [ ] O assinador.jar deve retornar mensagens de erro claras quando parâmetros forem inválidos
 
 
 ### US-03: Gerenciar Ciclo de Vida do Simulador do HubSaúde
@@ -89,7 +95,7 @@ Os requisitos funcionais são expressos na forma de histórias de usuário (user
 - [ ] O CLI deve permitir parar o Simulador
 - [ ] O CLI deve exibir o status atual do Simulador (ou que não está em execução)
 - [ ] O Simulador (simulador.jar) não faz parte do escopo de desenvolvimento deste sistema.
-- [ ] O Simulador (simulador.jar) deve ser obtido dinamicamente pelo CLI, baixando a versão mais recente disponível no repositório da disciplina.
+- [ ] O Simulador (simulador.jar) deve ser obtido dinamicamente pelo CLI, baixando a versão mais recente disponível no repositório da disciplina (GitHub Releases).
 - [ ] O CLI não deve baixar o Simulador (simulador.jar) se a versão mais recente já estiver disponível localmente.
 
 
@@ -202,9 +208,17 @@ Devem ser confeccionados e disponibilizados:
      - `assinatura-1.0.0-windows-amd64.exe` (Windows)
      - `assinatura-1.0.0-linux-amd64.AppImage` (Linux)
      - `assinatura-1.0.0-macos-amd64.dmg` (macOS)
+     - `simulador-1.0.0-windows-amd64.exe` (Windows)
+     - `simulador-1.0.0-linux-amd64.AppImage` (Linux)
+     - `simulador-1.0.0-macos-amd64.dmg` (macOS)
    - Distribuídos via **GitHub Releases**
    - Cada release deve conter assinatura dos artefatos publicados, conforme a seção abaixo.
    - Observe que é usado SemVer para versionamento, então a versão 1.0.0 é apenas um exemplo e deve ser atualizada conforme o desenvolvimento avança.
+
+7. **Código fonte do Simulador do HubSaúde**
+   - Implementação completa
+   - Código bem documentado
+   - Compatível com Windows, Linux e macOS
 
 ## 8. Considerações de implementação
 
@@ -284,3 +298,19 @@ A assinatura dos artefatos distribuídos proporciona:
 * maior segurança para usuários e integradores
 
 Essa abordagem segue práticas modernas de segurança para **cadeia de suprimentos de software** (*software supply chain security*).
+
+## 10. Referências
+
+1. **Especificações FHIR - Segurança**
+   - [Caso de Uso: Criar Assinatura](https://fhir.saude.go.gov.br/r4/seguranca/caso-de-uso-criar-assinatura.html)
+   - [Caso de Uso: Validar Assinatura](https://fhir.saude.go.gov.br/r4/seguranca/caso-de-uso-validar-assinatura.html)
+
+2. **Modelo C4 para Visualização de Arquitetura**
+   - [C4 Model](https://c4model.com/)
+   - Nível 1: [Diagrama de Contexto](./diagramas/imagens/contexto.svg)
+   - Nível 2: [Diagrama de Contêiner](./diagramas/imagens/conteineres.svg)
+
+3. **Boas Práticas de CLI**
+   - Mensagens claras e consistentes
+   - Tratamento adequado de erros
+   - Documentação de help integrada
