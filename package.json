@@ -1,0 +1,19 @@
+{
+  "name": "runner",
+  "version": "1.0.0",
+  "description": "Sistema Runner com CLIs multiplataforma em Node.js e assinador em Java.",
+  "private": true,
+  "type": "module",
+  "bin": {
+    "assinatura": "./cli/src/assinatura.js",
+    "simulador": "./cli/src/simulador.js"
+  },
+  "scripts": {
+    "test": "node --test cli/test/*.test.js",
+    "build:assinador": "sh scripts/build-assinador.sh",
+    "package:cli": "sh scripts/package-cli.sh"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
