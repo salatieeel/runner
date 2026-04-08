@@ -6,3 +6,9 @@ build/
 *.class
 *.jar
 !.mvn/wrapper/maven-wrapper.jar
+certificado.pem
+.gitignore
+.gitignore
+package-lock.json
+documento.txt
+documento.valid.sig
