@@ -1,0 +1,66 @@
+name: Release
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+  id-token: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+          cache: maven
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: '1.21'
+
+      - name: Install Cosign
+        uses: sigstore/cosign-installer@v3.4.0
+
+      - name: Build Assinador
+        run: mvn -B package --file assinador/pom.xml
+
+      - name: Build Go CLIs
+        run: |
+          cd cli
+          GOOS=windows GOARCH=amd64 go build -o ../assinatura-windows-amd64.exe .
+          GOOS=linux GOARCH=amd64 go build -o ../assinatura-linux-amd64 .
+          GOOS=darwin GOARCH=amd64 go build -o ../assinatura-darwin-amd64 .
+          GOOS=darwin GOARCH=arm64 go build -o ../assinatura-darwin-arm64 .
+
+      - name: Generate Checksums
+        run: |
+          sha256sum assinatura-windows-amd64.exe > assinatura-windows-amd64.exe.sha256
+          sha256sum assinatura-linux-amd64 > assinatura-linux-amd64.sha256
+          sha256sum assinatura-darwin-amd64 > assinatura-darwin-amd64.sha256
+          sha256sum assinatura-darwin-arm64 > assinatura-darwin-arm64.sha256
+          sha256sum assinador/target/assinador.jar > assinador.jar.sha256
+
+      - name: Sign Artifacts with Cosign
+        run: |
+          cosign sign-blob --yes assinatura-windows-amd64.exe --bundle assinatura-windows-amd64.exe.bundle
+          cosign sign-blob --yes assinatura-linux-amd64 --bundle assinatura-linux-amd64.bundle
+          cosign sign-blob --yes assinatura-darwin-amd64 --bundle assinatura-darwin-amd64.bundle
+          cosign sign-blob --yes assinatura-darwin-arm64 --bundle assinatura-darwin-arm64.bundle
+          cosign sign-blob --yes assinador/target/assinador.jar --bundle assinador.jar.bundle
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            assinatura-*
+            assinador/target/assinador.jar
+            assinador.jar.sha256
+            assinador.jar.bundle
