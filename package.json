@@ -1,19 +1,17 @@
 {
   "name": "runner",
   "version": "1.0.0",
-  "description": "Sistema Runner com CLIs multiplataforma em Node.js e assinador em Java.",
+  "description": "Assistente de terminal multiplataforma para assinatura simulada de documentos.",
   "private": true,
   "type": "module",
-  "bin": {
-    "assinatura": "./cli/src/assinatura.js",
-    "simulador": "./cli/src/simulador.js"
-  },
   "scripts": {
-    "test": "node --test cli/test/*.test.js",
-    "build:assinador": "sh scripts/build-assinador.sh",
-    "package:cli": "sh scripts/package-cli.sh"
+    "clean": "rm -rf cli/assinatura assinador/target assinador/build",
+    "build": "npm run build:cli && npm run build:assinador",
+    "build:cli": "cd cli && go build -o assinatura .",
+    "build:assinador": "mvn -B package -f assinador/pom.xml",
+    "start": "npm run build && echo '' && echo '>>> Abrindo menu (digite o número da opção)...' && ./cli/assinatura"
   },
   "engines": {
-    "node": ">=20"
+    "node": ">=18"
   }
 }

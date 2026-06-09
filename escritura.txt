@@ -1,0 +1,14 @@
+DECLARAÇÃO DE COMPRA DE LOTE (DOCUMENTO DE TESTE)
+
+Eu, Sr. Tuto Oliveira Santos, portador do CPF nº 123.456.789-00, declaro para os devidos fins que realizei a compra de um lote residencial localizado na Rua das Palmeiras, nº 100, Bairro Jardim Exemplo, na cidade de Goiânia – GO.
+
+O referido lote foi adquirido na data de 15 de março de 2026, pelo valor de R$ 85.000,00 (oitenta e cinco mil reais), conforme acordo firmado entre as partes.
+
+Declaro ainda que este documento tem caráter apenas ilustrativo e foi criado exclusivamente para fins de teste, não possuindo validade jurídica.
+
+Goiânia – GO, 15 de março de 2026.
+
+---
+
+Sr. Tuto Oliveira Santos
+CPF: 123.456.789-00

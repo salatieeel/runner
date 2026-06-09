@@ -1,5 +1,3 @@
-package br.ufg.inf.es.runner.assinador;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
